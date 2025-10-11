@@ -36,9 +36,7 @@ const chapters: Chapter[] = [
 
 export function WorldMap() {
   const [selected, setSelected] = useState<Chapter | null>(null)
-  const [hovered, setHovered] = useState<Chapter | null>(null)
-  const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 })
-
+  const [hovered, setHovered] = useState<number | null>(null)
   const [zoom, setZoom] = useState(1)
   const [offset, setOffset] = useState({ x: 0, y: 0 })
   const isDragging = useRef(false)
@@ -47,7 +45,8 @@ export function WorldMap() {
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault()
     const delta = -e.deltaY * 0.001
-    setZoom(Math.min(Math.max(zoom + delta, 1), 3))
+    const newZoom = Math.min(Math.max(zoom + delta, 1), 3)
+    setZoom(newZoom)
   }
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -58,14 +57,11 @@ export function WorldMap() {
     isDragging.current = false
   }
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDragging.current) {
-      const dx = e.clientX - lastPos.current.x
-      const dy = e.clientY - lastPos.current.y
-      setOffset((prev) => ({ x: prev.x + dx, y: prev.y + dy }))
-      lastPos.current = { x: e.clientX, y: e.clientY }
-    } else if (hovered) {
-      setHoverPos({ x: e.clientX, y: e.clientY })
-    }
+    if (!isDragging.current) return
+    const dx = e.clientX - lastPos.current.x
+    const dy = e.clientY - lastPos.current.y
+    setOffset((prev) => ({ x: prev.x + dx, y: prev.y + dy }))
+    lastPos.current = { x: e.clientX, y: e.clientY }
   }
 
   return (
@@ -73,70 +69,58 @@ export function WorldMap() {
       <Card className="border-2 border-primary/20 overflow-hidden bg-gradient-to-br from-blue-50 to-yellow-50">
         <CardContent className="p-8">
           <div
-            className="relative w-full aspect-[2/1] bg-cover bg-center rounded-2xl shadow-inner overflow-hidden cursor-grab active:cursor-grabbing"
-            style={{
-              backgroundImage: "url('/map.png')", // ✅ ensure map.png is in /public
-            }}
+            className="relative w-full aspect-[2/1] rounded-2xl shadow-inner overflow-hidden cursor-grab active:cursor-grabbing"
             onWheel={handleWheel}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
           >
-            <div
-              className="absolute inset-0 transition-transform duration-200 ease-out"
+            <svg
+              viewBox="0 0 200 100"
+              className="absolute inset-0 w-full h-full transition-transform duration-200 ease-out"
               style={{
                 transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoom})`,
                 transformOrigin: "center center",
               }}
             >
+              {/* World land paths — simplified and aesthetic vector map */}
+              <path
+                d="M15 40 L20 38 L25 45 L22 50 L15 47 Z M30 38 L40 35 L45 40 L43 45 L35 43 Z M50 35 L60 33 L65 38 L63 42 L55 40 Z M70 40 L80 38 L85 45 L80 48 L72 46 Z M90 55 L100 52 L105 58 L100 60 L92 58 Z M120 35 L130 33 L135 38 L132 42 L125 40 Z M150 42 L160 40 L165 45 L160 48 L152 46 Z M175 65 L185 63 L188 68 L185 70 L177 68 Z"
+                fill="#B5E4FF"
+                stroke="#60A5FA"
+                strokeWidth="0.4"
+              />
+
+              {/* Chapter markers */}
               {chapters.map((chap) => (
-                <div
+                <g
                   key={chap.id}
-                  className="absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 group"
-                  style={{
-                    left: `${chap.x}%`,
-                    top: `${chap.y}%`,
-                    transform: `translate(-50%, -50%) scale(${1 / zoom})`,
-                  }}
-                  onMouseEnter={(e) => {
-                    setHovered(chap)
-                    setHoverPos({ x: e.clientX, y: e.clientY })
-                  }}
+                  transform={`translate(${chap.x * 2}, ${chap.y})`}
+                  onMouseEnter={() => setHovered(chap.id)}
                   onMouseLeave={() => setHovered(null)}
                   onClick={() => setSelected(chap)}
+                  className="cursor-pointer"
                 >
-                  <div className="absolute inset-0 w-10 h-10 -m-5 bg-secondary rounded-full animate-ping opacity-30" />
-                  <div
-                    className={`relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-150 ${
-                      hovered?.id === chap.id || selected?.id === chap.id
-                        ? "bg-secondary scale-125 shadow-xl"
-                        : "bg-primary shadow-lg"
-                    }`}
-                  >
-                    <MapPinIcon className="text-white" size={18} />
-                  </div>
-                </div>
+                  <circle
+                    r="1.6"
+                    fill={hovered === chap.id || selected?.id === chap.id ? "#FACC15" : "#2563EB"}
+                  />
+                  {hovered === chap.id && (
+                    <foreignObject x="-40" y="-22" width="80" height="20">
+                      <div className="bg-gray-900 text-white text-xs rounded px-2 py-1 text-center shadow-xl">
+                        {chap.name}
+                      </div>
+                    </foreignObject>
+                  )}
+                </g>
               ))}
-            </div>
+            </svg>
 
             <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-gray-700 shadow-md">
               <MapPinIcon className="inline mr-2" size={16} />
               Hover or click a marker to view chapter info
             </div>
-
-            {hovered && (
-              <div
-                className="fixed z-50 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-xl pointer-events-none transition-all duration-100 ease-out"
-                style={{
-                  top: hoverPos.y + 15,
-                  left: hoverPos.x + 15,
-                }}
-              >
-                <div className="font-semibold">{hovered.name}</div>
-                <div className="text-xs opacity-80">{hovered.city}</div>
-              </div>
-            )}
           </div>
         </CardContent>
       </Card>
