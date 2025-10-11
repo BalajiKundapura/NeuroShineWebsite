@@ -44,14 +44,9 @@ export function WorldMap() {
   const isDragging = useRef(false)
   const lastPos = useRef({ x: 0, y: 0 })
 
+  // Explicit buttons only, no wheel zoom
   const handleZoom = (dir: "in" | "out") => {
     setZoom((z) => Math.min(Math.max(dir === "in" ? z + 0.2 : z - 0.2, 1), 3))
-  }
-
-  const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault()
-    const delta = -e.deltaY * 0.001
-    setZoom(Math.min(Math.max(zoom + delta, 1), 3))
   }
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -79,9 +74,8 @@ export function WorldMap() {
           <div
             className="relative w-full aspect-[2/1] bg-cover bg-center rounded-2xl shadow-inner overflow-hidden cursor-grab active:cursor-grabbing"
             style={{
-              backgroundImage: "url('/map-detailed-vector.png')", // ✅ detailed aesthetic vector image
+              backgroundImage: "url('/map-detailed-vector.png')",
             }}
-            onWheel={handleWheel}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
