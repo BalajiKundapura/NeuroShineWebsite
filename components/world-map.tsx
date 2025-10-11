@@ -222,7 +222,7 @@ export function WorldMap() {
           <div
             className="relative w-full aspect-[2/1] bg-cover bg-center rounded-2xl shadow-inner overflow-hidden cursor-grab active:cursor-grabbing"
             style={{
-              backgroundImage: "map.png",
+              backgroundImage: "url('map.png')",
             }}
             onWheel={handleWheel}
             onMouseDown={handleMouseDown}
