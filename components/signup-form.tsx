@@ -3,47 +3,58 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Loader2, CheckCircle } from "lucide-react"
+import { Loader2Icon, CheckCircleIcon } from "@/components/icons"
+import { useAuth } from "@/contexts/auth-context"
 
 export function SignUpForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState("")
+  const { signup } = useAuth()
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError("")
 
     const formData = new FormData(e.currentTarget)
-    const data = {
-      firstName: formData.get("firstName"),
-      lastName: formData.get("lastName"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      chapter: formData.get("chapter"),
-      experience: formData.get("experience"),
-      availability: formData.get("availability"),
-      message: formData.get("message"),
-      formType: "Volunteer Sign Up",
-    }
+    const email = formData.get("email") as string
+    const password = formData.get("password") as string
+    const displayName = `${formData.get("firstName")} ${formData.get("lastName")}`
 
     try {
-      const response = await fetch("/api/submit-form", {
+      await signup(email, password, displayName)
+
+      const volunteerData = {
+        firstName: formData.get("firstName"),
+        lastName: formData.get("lastName"),
+        email,
+        phone: formData.get("phone"),
+        chapter: formData.get("chapter"),
+        experience: formData.get("experience"),
+        availability: formData.get("availability"),
+        message: formData.get("message"),
+        formType: "Volunteer Sign Up",
+      }
+
+      await fetch("/api/submit-form", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(volunteerData),
       })
 
-      if (response.ok) {
-        setIsSubmitted(true)
-      } else {
-        alert("There was an error submitting your form. Please try again.")
-      }
-    } catch (error) {
-      alert("There was an error submitting your form. Please try again.")
+      setIsSubmitted(true)
+      setTimeout(() => {
+        router.push("/blog")
+      }, 2000)
+    } catch (err: any) {
+      setError(err.message || "There was an error creating your account. Please try again.")
     } finally {
       setIsSubmitting(false)
     }
@@ -53,18 +64,14 @@ export function SignUpForm() {
     return (
       <div className="text-center space-y-6 py-12">
         <div className="w-20 h-20 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
-          <CheckCircle className="text-primary" size={40} />
+          <CheckCircleIcon className="text-primary" size={40} />
         </div>
         <div className="space-y-2">
-          <h3 className="text-2xl font-bold">Thank You!</h3>
+          <h3 className="text-2xl font-bold">Account Created!</h3>
           <p className="text-muted-foreground leading-relaxed">
-            We've received your volunteer application. Our team will review it and get back to you within 2-3 business
-            days.
+            Welcome to NeuroShine! Redirecting you to your dashboard...
           </p>
         </div>
-        <Button onClick={() => setIsSubmitted(false)} variant="outline" className="rounded-full bg-transparent">
-          Submit Another Application
-        </Button>
       </div>
     )
   }
@@ -72,9 +79,11 @@ export function SignUpForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Volunteer Application</h2>
-        <p className="text-muted-foreground">Fill out the form below to join our volunteer team.</p>
+        <h2 className="text-2xl font-bold">Create Your Account</h2>
+        <p className="text-muted-foreground">Join our volunteer team and make a difference.</p>
       </div>
+
+      {error && <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">{error}</div>}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
@@ -90,6 +99,12 @@ export function SignUpForm() {
       <div className="space-y-2">
         <Label htmlFor="email">Email *</Label>
         <Input id="email" name="email" type="email" placeholder="john@example.com" required />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="password">Password *</Label>
+        <Input id="password" name="password" type="password" placeholder="••••••••" required minLength={6} />
+        <p className="text-xs text-muted-foreground">Must be at least 6 characters</p>
       </div>
 
       <div className="space-y-2">
@@ -135,11 +150,11 @@ export function SignUpForm() {
       >
         {isSubmitting ? (
           <>
-            <Loader2 className="mr-2 animate-spin" size={20} />
-            Submitting...
+            <Loader2Icon className="mr-2" size={20} />
+            Creating Account...
           </>
         ) : (
-          "Submit Application"
+          "Create Account & Join"
         )}
       </Button>
     </form>

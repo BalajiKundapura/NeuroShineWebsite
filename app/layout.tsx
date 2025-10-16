@@ -5,6 +5,7 @@ import "./globals.css"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { FloatingParticles } from "@/components/floating-particles"
+import { AuthProvider } from "@/contexts/auth-context"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,10 +32,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <body>
-        <FloatingParticles />
-        <Navigation />
-        <main className="min-h-screen pt-16 relative z-10">{children}</main>
-        <Footer />
+        <AuthProvider>
+          <FloatingParticles />
+          <Navigation />
+          <main className="min-h-screen pt-16 relative z-10">{children}</main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   )

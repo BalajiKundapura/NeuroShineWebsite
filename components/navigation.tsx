@@ -2,11 +2,13 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { MenuIcon, XIcon } from "@/components/icons"
+import { MenuIcon, XIcon, LogOutIcon, UserIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
+import { useAuth } from "@/contexts/auth-context"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const { user, logout, loading } = useAuth()
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -17,6 +19,11 @@ export function Navigation() {
     { href: "/calendar", label: "Calendar" },
     { href: "/donate", label: "Donate" },
   ]
+
+  const handleLogout = async () => {
+    await logout()
+    setIsOpen(false)
+  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
@@ -43,9 +50,31 @@ export function Navigation() {
                 {link.label}
               </Link>
             ))}
-            <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full">
-              <Link href="/signup">Sign Up</Link>
-            </Button>
+            {!loading && (
+              <>
+                {user ? (
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full">
+                      <UserIcon size={16} className="text-primary" />
+                      <span className="text-sm font-medium">{user.displayName || user.email}</span>
+                    </div>
+                    <Button onClick={handleLogout} variant="outline" size="sm" className="rounded-full bg-transparent">
+                      <LogOutIcon size={16} className="mr-2" />
+                      Logout
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Button asChild variant="outline" size="sm" className="rounded-full bg-transparent">
+                      <Link href="/login">Login</Link>
+                    </Button>
+                    <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full">
+                      <Link href="/signup">Sign Up</Link>
+                    </Button>
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -70,10 +99,35 @@ export function Navigation() {
                 {link.label}
               </Link>
             ))}
-            <div className="px-4 pt-2">
-              <Button asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full">
-                <Link href="/signup">Sign Up</Link>
-              </Button>
+            <div className="px-4 pt-2 space-y-2">
+              {!loading && (
+                <>
+                  {user ? (
+                    <>
+                      <div className="flex items-center gap-2 px-3 py-2 bg-primary/10 rounded-lg mb-2">
+                        <UserIcon size={16} className="text-primary" />
+                        <span className="text-sm font-medium">{user.displayName || user.email}</span>
+                      </div>
+                      <Button onClick={handleLogout} variant="outline" className="w-full rounded-full bg-transparent">
+                        <LogOutIcon size={16} className="mr-2" />
+                        Logout
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button asChild variant="outline" className="w-full rounded-full bg-transparent">
+                        <Link href="/login">Login</Link>
+                      </Button>
+                      <Button
+                        asChild
+                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
+                      >
+                        <Link href="/signup">Sign Up</Link>
+                      </Button>
+                    </>
+                  )}
+                </>
+              )}
             </div>
           </div>
         )}

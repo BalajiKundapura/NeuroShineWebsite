@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
@@ -8,6 +8,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { ChevronLeft, ChevronRight, Plus, MapPin, Clock, Users, Edit, Trash2, Lock } from "lucide-react"
+import { collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, orderBy } from "firebase/firestore"
+import { db } from "@/lib/firebase"
+import { useAuth } from "@/contexts/auth-context"
 
 interface Event {
   id: string
@@ -20,67 +23,29 @@ interface Event {
   attendees?: number
 }
 
-const initialEvents: Event[] = [
-  {
-    id: "1",
-    title: "Sensory-Friendly Art Workshop",
-    date: new Date(2025, 9, 15),
-    time: "2:00 PM - 4:00 PM",
-    location: "San Francisco Community Center",
-    chapter: "San Francisco Bay Area",
-    description: "A calming art session designed for neurodivergent children with sensory considerations.",
-    attendees: 24,
-  },
-  {
-    id: "2",
-    title: "Volunteer Training Session",
-    date: new Date(2025, 9, 18),
-    time: "10:00 AM - 12:00 PM",
-    location: "Online (Zoom)",
-    chapter: "All Chapters",
-    description: "Learn best practices for working with neurodivergent children. Open to all new volunteers.",
-    attendees: 45,
-  },
-  {
-    id: "3",
-    title: "Family Game Night",
-    date: new Date(2025, 9, 22),
-    time: "6:00 PM - 8:00 PM",
-    location: "Los Angeles Recreation Center",
-    chapter: "Greater Los Angeles",
-    description: "Board games and activities for the whole family in an inclusive, welcoming environment.",
-    attendees: 32,
-  },
-  {
-    id: "4",
-    title: "App Development Workshop",
-    date: new Date(2025, 9, 25),
-    time: "1:00 PM - 3:00 PM",
-    location: "Seattle Tech Hub",
-    chapter: "Seattle Metro",
-    description: "Join our developers to learn about creating accessible apps for neurodivergent children.",
-    attendees: 18,
-  },
-  {
-    id: "5",
-    title: "Outdoor Adventure Day",
-    date: new Date(2025, 9, 28),
-    time: "9:00 AM - 2:00 PM",
-    location: "Golden Gate Park",
-    chapter: "San Francisco Bay Area",
-    description: "Nature walks, scavenger hunts, and outdoor activities designed for all abilities.",
-    attendees: 28,
-  },
-]
-
 export function CalendarView() {
   const [currentDate, setCurrentDate] = useState(new Date(2025, 9, 1)) // October 2025
-  const [events, setEvents] = useState<Event[]>(initialEvents)
+  const [events, setEvents] = useState<Event[]>([])
   const [isAdmin, setIsAdmin] = useState(false)
   const [adminPassword, setAdminPassword] = useState("")
   const [showAdminDialog, setShowAdminDialog] = useState(false)
   const [editingEvent, setEditingEvent] = useState<Event | null>(null)
   const [showEventDialog, setShowEventDialog] = useState(false)
+  const { user } = useAuth()
+
+  useEffect(() => {
+    const q = query(collection(db, "events"), orderBy("date", "asc"))
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const eventsData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+        date: doc.data().date.toDate(),
+      })) as Event[]
+      setEvents(eventsData)
+    })
+
+    return () => unsubscribe()
+  }, [])
 
   // Calendar logic
   const year = currentDate.getFullYear()
@@ -128,9 +93,8 @@ export function CalendarView() {
     }
   }
 
-  const handleAddEvent = (formData: FormData) => {
-    const newEvent: Event = {
-      id: Date.now().toString(),
+  const handleAddEvent = async (formData: FormData) => {
+    const newEvent = {
       title: formData.get("title") as string,
       date: new Date(formData.get("date") as string),
       time: formData.get("time") as string,
@@ -138,33 +102,46 @@ export function CalendarView() {
       chapter: formData.get("chapter") as string,
       description: formData.get("description") as string,
     }
-    setEvents([...events, newEvent])
-    setShowEventDialog(false)
+
+    try {
+      await addDoc(collection(db, "events"), newEvent)
+      setShowEventDialog(false)
+    } catch (error) {
+      console.error("Error adding event:", error)
+      alert("Failed to add event. Please try again.")
+    }
   }
 
-  const handleEditEvent = (formData: FormData) => {
+  const handleEditEvent = async (formData: FormData) => {
     if (!editingEvent) return
-    const updatedEvents = events.map((event) =>
-      event.id === editingEvent.id
-        ? {
-            ...event,
-            title: formData.get("title") as string,
-            date: new Date(formData.get("date") as string),
-            time: formData.get("time") as string,
-            location: formData.get("location") as string,
-            chapter: formData.get("chapter") as string,
-            description: formData.get("description") as string,
-          }
-        : event,
-    )
-    setEvents(updatedEvents)
-    setEditingEvent(null)
-    setShowEventDialog(false)
+
+    const updatedEvent = {
+      title: formData.get("title") as string,
+      date: new Date(formData.get("date") as string),
+      time: formData.get("time") as string,
+      location: formData.get("location") as string,
+      chapter: formData.get("chapter") as string,
+      description: formData.get("description") as string,
+    }
+
+    try {
+      await updateDoc(doc(db, "events", editingEvent.id), updatedEvent)
+      setEditingEvent(null)
+      setShowEventDialog(false)
+    } catch (error) {
+      console.error("Error updating event:", error)
+      alert("Failed to update event. Please try again.")
+    }
   }
 
-  const handleDeleteEvent = (eventId: string) => {
+  const handleDeleteEvent = async (eventId: string) => {
     if (confirm("Are you sure you want to delete this event?")) {
-      setEvents(events.filter((event) => event.id !== eventId))
+      try {
+        await deleteDoc(doc(db, "events", eventId))
+      } catch (error) {
+        console.error("Error deleting event:", error)
+        alert("Failed to delete event. Please try again.")
+      }
     }
   }
 
