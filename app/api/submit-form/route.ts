@@ -1,38 +1,44 @@
 import { NextResponse } from "next/server"
+import { Resend } from "resend"
+
+const resend = new Resend("re_DBaAsrMK_MYgbfLHn4Cq1ZVLrw9YKYoRe")
 
 export async function POST(request: Request) {
   try {
     const data = await request.json()
 
-    // In a production environment, you would:
-    // 1. Validate the data
-    // 2. Store it in a database
-    // 3. Send an email notification using a service like Resend, SendGrid, or Nodemailer
-
-    // For demonstration, we'll log the data and simulate email sending
-    console.log("Form submission received:", data)
-
-    // Simulate email sending
     const emailContent = `
-      New ${data.formType} Form Submission
+      New ${data.formType} Form Submission from NeuroShine Website
       
       ${Object.entries(data)
+        .filter(([key]) => key !== "formType")
         .map(([key, value]) => `${key}: ${value}`)
         .join("\n")}
     `
 
-    console.log("Email would be sent with content:", emailContent)
+    // Send email using Resend
+    const emailResult = await resend.emails.send({
+      from: "Neuroshine <Neuroshine@resend.dev>",
+      to: process.env.ADMIN_EMAIL || "neuroshine.official@gmail.com",
+      subject: `New ${data.formType} Submission - NeuroShine`,
+      text: emailContent,
+    })
 
-    // In production, you would send an actual email here:
-    // await sendEmail({
-    //   to: process.env.ADMIN_EMAIL,
-    //   subject: `New ${data.formType} Submission`,
-    //   text: emailContent,
-    // })
+    console.log("Email sent successfully:", emailResult)
 
-    return NextResponse.json({ success: true, message: "Form submitted successfully" })
+    return NextResponse.json({
+      success: true,
+      message: "Form submitted successfully and email sent",
+      emailId: emailResult.data?.id,
+    })
   } catch (error) {
     console.error("Error processing form submission:", error)
-    return NextResponse.json({ success: false, message: "Error submitting form" }, { status: 500 })
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Error submitting form: " + (error instanceof Error ? error.message : "Unknown error"),
+      },
+      { status: 500 },
+    )
   }
 }
