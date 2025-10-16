@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     // Send email using Resend
     const emailResult = await resend.emails.send({
       from: "Neuroshine <Neuroshine@resend.dev>",
-      to: process.env.ADMIN_EMAIL || "neuroshine.official@gmail.com",
+      to: process.env.ADMIN_EMAIL || "balaji.kundapuras@gmail.com",
       subject: `New ${data.formType} Submission - NeuroShine`,
       text: emailContent,
     })
