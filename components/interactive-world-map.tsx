@@ -261,7 +261,7 @@ export function InteractiveWorldMap() {
             <div id="world-map" className="w-full h-[600px] rounded-lg" />
 
             {/* Instructions overlay */}
-            <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-3 rounded-xl shadow-lg z-[1000] max-w-xs">
+            {/* <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-3 rounded-xl shadow-lg z-[1000] max-w-xs">
               <div className="flex items-start gap-3">
                 <MapPinIcon className="text-primary flex-shrink-0 mt-0.5" size={20} />
                 <div className="text-sm">
@@ -273,7 +273,7 @@ export function InteractiveWorldMap() {
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Chapter count badge */}
             <div className="absolute top-4 right-4 bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-full shadow-lg z-[1000] font-semibold">
