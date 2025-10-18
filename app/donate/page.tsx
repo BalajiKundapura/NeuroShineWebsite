@@ -1,8 +1,21 @@
+"use client"
+
+import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Heart, Users, Sparkles, DollarSign, Gift } from "lucide-react"
+import {
+  HeartIcon as Heart,
+  UsersIcon as Users,
+  SparklesIcon as Sparkles,
+  DollarSignIcon as DollarSign,
+  GiftIcon as Gift,
+} from "@/components/icons"
+import { DONATION_PRODUCTS } from "@/lib/donation-products"
+import StripeCheckout from "@/components/stripe-checkout"
 
 export default function DonatePage() {
+  const [selectedDonation, setSelectedDonation] = useState<string | null>(null)
+
   return (
     <div className="relative">
       {/* Hero Section */}
@@ -50,7 +63,7 @@ export default function DonatePage() {
         </div>
       </section>
 
-      {/* GoFundMe Integration */}
+      {/* Stripe Checkout Integration */}
       <section className="container mx-auto px-4 pb-16">
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="text-center space-y-4">
@@ -60,71 +73,43 @@ export default function DonatePage() {
             </p>
           </div>
 
-          <Card className="border-2">
-            <CardContent className="p-8 space-y-6">
-              {/* GoFundMe Embed Placeholder */}
-              <div className="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl p-12 text-center space-y-6">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-                  <Heart className="text-white" size={40} />
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold">Support NeuroShine</h3>
-                  <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                    Click the button below to donate through our secure GoFundMe campaign. Your donation is
-                    tax-deductible and goes directly to supporting neurodivergent children.
-                  </p>
-                </div>
-
-                {/* GoFundMe Button */}
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white rounded-full px-8 text-lg"
+          {!selectedDonation ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {DONATION_PRODUCTS.map((product) => (
+                <Card
+                  key={product.id}
+                  className="border-2 hover:shadow-lg transition-all hover:scale-105 cursor-pointer"
+                  onClick={() => setSelectedDonation(product.id)}
                 >
-                  <a
-                    href="https://www.gofundme.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center"
-                  >
-                    <Heart className="mr-2" size={20} />
-                    Donate on GoFundMe
-                  </a>
-                </Button>
-
-                <p className="text-sm text-muted-foreground">
-                  To integrate your actual GoFundMe campaign, replace the URL above with your campaign link
-                </p>
-              </div>
-
-              {/* Alternative: GoFundMe Widget Embed Code */}
-              <div className="pt-6 border-t">
-                <details className="space-y-4">
-                  <summary className="cursor-pointer text-sm font-medium text-muted-foreground hover:text-foreground">
-                    How to add your GoFundMe widget
-                  </summary>
-                  <div className="text-sm text-muted-foreground space-y-2 bg-muted p-4 rounded-lg">
-                    <p className="font-medium">To embed your GoFundMe widget:</p>
-                    <ol className="list-decimal list-inside space-y-1 ml-2">
-                      <li>Go to your GoFundMe campaign page</li>
-                      <li>Click "Share" and then "Embed"</li>
-                      <li>Copy the embed code</li>
-                      <li>
-                        Replace the placeholder section in{" "}
-                        <code className="bg-background px-1 rounded">donate/page.tsx</code> with your embed code
-                      </li>
-                    </ol>
-                    <p className="pt-2">
-                      The embed code will look something like:{" "}
-                      <code className="bg-background px-1 rounded text-xs">
-                        {'<iframe src="https://www.gofundme.com/f/your-campaign/widget/large" ...>'}
-                      </code>
-                    </p>
-                  </div>
-                </details>
-              </div>
-            </CardContent>
-          </Card>
+                  <CardContent className="p-6 space-y-4">
+                    <div className="text-center space-y-2">
+                      <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                        <Heart className="text-white" size={32} />
+                      </div>
+                      <h3 className="text-2xl font-bold text-primary">${product.priceInCents / 100}</h3>
+                      <p className="font-semibold">{product.description}</p>
+                      <p className="text-sm text-muted-foreground">{product.impact}</p>
+                    </div>
+                    <Button className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white rounded-full">
+                      Select Amount
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <Card className="border-2">
+              <CardContent className="p-8 space-y-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-2xl font-bold">Complete Your Donation</h3>
+                  <Button variant="outline" onClick={() => setSelectedDonation(null)} className="rounded-full">
+                    Change Amount
+                  </Button>
+                </div>
+                <StripeCheckout productId={selectedDonation} />
+              </CardContent>
+            </Card>
+          )}
         </div>
       </section>
 

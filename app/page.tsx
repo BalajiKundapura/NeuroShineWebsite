@@ -55,7 +55,7 @@ export default function HomePage() {
               <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-4">
                 <UsersIcon className="text-primary" size={32} />
               </div>
-              <h3 className="text-4xl font-bold text-primary">500+</h3>
+              <h3 className="text-4xl font-bold text-primary">80+</h3>
               <p className="text-muted-foreground">Active Volunteers</p>
             </CardContent>
           </Card>
@@ -64,7 +64,7 @@ export default function HomePage() {
               <div className="w-16 h-16 mx-auto bg-secondary/10 rounded-full flex items-center justify-center mb-4">
                 <MapPinIcon className="text-secondary-foreground" size={32} />
               </div>
-              <h3 className="text-4xl font-bold text-secondary-foreground">25</h3>
+              <h3 className="text-4xl font-bold text-secondary-foreground"></h3>
               <p className="text-muted-foreground">Chapters Nationwide</p>
             </CardContent>
           </Card>

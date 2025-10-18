@@ -180,7 +180,7 @@ export default function AboutPage() {
                 <p className="text-muted-foreground">Children Helped</p>
               </div>
               <div className="space-y-2">
-                <p className="text-5xl font-bold text-primary">500+</p>
+                <p className="text-5xl font-bold text-primary">80+</p>
                 <p className="text-muted-foreground">Active Volunteers</p>
               </div>
               <div className="space-y-2">
