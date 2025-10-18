@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { UsersIcon, CalendarIcon, MailIcon, ArrowRightIcon, MapPinIcon } from "@/components/icons"
 import Link from "next/link"
-import { WorldMap } from "@/components/world-map"
+import { InteractiveWorldMap } from "@/components/interactive-world-map"
 
 const chapters = [
   {
@@ -135,8 +135,8 @@ export default function ChaptersPage() {
 
       {/* Interactive World Map */}
       <section className="container mx-auto px-4 py-16">
-        <div className="max-w-6xl mx-auto">
-          <WorldMap />
+        <div className="max-w-7xl mx-auto">
+          <InteractiveWorldMap />
         </div>
       </section>
 
