@@ -6,7 +6,7 @@ import { loadStripe } from "@stripe/stripe-js"
 
 import { startCheckoutSession } from "@/app/actions/stripe"
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+const stripePromise = loadStripe("pk_live_51Ro6lyFKjHDrBAIHGKoYbpFc7ZLt8vgoFuLAYVNSSpLC5DKTGj7aL7sSh8iZRKQwiZvrNfFn4qcERGPmEiTNaUxB00ITxnuZM")
 
 export default function StripeCheckout({ productId }: { productId: string }) {
   const startCheckoutSessionForProduct = useCallback(() => startCheckoutSession(productId), [productId])
