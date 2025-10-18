@@ -3,41 +3,23 @@ import { HeartIcon, TargetIcon, EyeIcon, UsersIcon } from "@/components/icons"
 
 const teamMembers = [
   {
-    name: "Sarah Johnson",
+    name: "Satvik Koya",
     role: "President",
-    bio: "Passionate advocate for neurodivergent children with 10+ years of experience in non-profit leadership.",
+    bio: "",
     image: "/professional-woman-smiling.png",
   },
   {
-    name: "Michael Chen",
+    name: "Balaji Kundapura",
     role: "Vice President",
-    bio: "Software engineer and parent of a neurodivergent child, dedicated to creating accessible technology.",
+    bio: "",
     image: "/professional-man-smiling.png",
   },
   {
-    name: "Emily Rodriguez",
+    name: "Sathvik Jampana",
     role: "Treasurer",
-    bio: "Financial expert committed to ensuring every dollar makes a meaningful impact in children's lives.",
+    bio: "",
     image: "/professional-woman-glasses.png",
-  },
-  {
-    name: "David Park",
-    role: "Director of Technology",
-    bio: "UX designer specializing in accessible interfaces and inclusive design for all abilities.",
-    image: "/professional-bearded-man.png",
-  },
-  {
-    name: "Lisa Thompson",
-    role: "Director of Volunteers",
-    bio: "Community organizer with a passion for building inclusive spaces and empowering volunteers.",
-    image: "/professional-woman-smiling-warmly.jpg",
-  },
-  {
-    name: "James Williams",
-    role: "Director of Outreach",
-    bio: "Former educator dedicated to expanding NeuroShine's reach to communities across the nation.",
-    image: "/professional-man-casual.png",
-  },
+  }
 ]
 
 export default function AboutPage() {
