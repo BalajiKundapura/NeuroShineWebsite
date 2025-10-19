@@ -22,7 +22,7 @@ export async function startCheckoutSession(productId: string) {
       redirect_on_completion: "never",
       line_items: [
         {
-          price: product.priceId, // ✅ Use Stripe Price ID
+          price: "price_1SJlPKFKjHDrBAIHoIJU3JJ8", // ✅ Use Stripe Price ID
           quantity: 1,
         },
       ],
