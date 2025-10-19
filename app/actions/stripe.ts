@@ -22,7 +22,7 @@ export async function startCheckoutSession(productId: string) {
       redirect_on_completion: "never",
       line_items: [
         {
-          price: product.priceId, // Use the Price ID from Stripe
+          price: product.priceId, // ✅ Use Stripe Price ID
           quantity: 1,
         },
       ],
@@ -31,6 +31,10 @@ export async function startCheckoutSession(productId: string) {
 
     console.log("[v0] Checkout session created:", session.id)
     console.log("[v0] Client secret exists:", !!session.client_secret)
+
+    if (!session.client_secret) {
+      throw new Error("Stripe session client_secret is missing")
+    }
 
     return session.client_secret
   } catch (error) {
