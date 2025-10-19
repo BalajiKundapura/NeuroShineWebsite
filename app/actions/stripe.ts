@@ -27,6 +27,7 @@ export async function startCheckoutSession(productId: string) {
         },
       ],
       mode: "payment",
+      payment_method_types: ["card"],
     })
 
     console.log("[v0] Checkout session created:", session.id)
