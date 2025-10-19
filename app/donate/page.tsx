@@ -86,9 +86,7 @@ export default function DonatePage() {
                       <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
                         <Heart className="text-white" size={32} />
                       </div>
-                      <h3 className="text-2xl font-bold text-primary">${product.priceInCents / 100}</h3>
-                      <p className="font-semibold">{product.description}</p>
-                      <p className="text-sm text-muted-foreground">{product.impact}</p>
+                      <h3 className="text-2xl font-bold text-primary">{product.name}</h3>
                     </div>
                     <Button className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white rounded-full">
                       Select Amount
