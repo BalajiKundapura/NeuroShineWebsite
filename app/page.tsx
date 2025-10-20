@@ -73,7 +73,7 @@ export default function HomePage() {
               <div className="w-16 h-16 mx-auto bg-accent/10 rounded-full flex items-center justify-center mb-4">
                 <SparklesIcon className="text-primary" size={32} />
               </div>
-              <h3 className="text-4xl font-bold text-primary">12</h3>
+              <h3 className="text-4xl font-bold text-primary">1</h3>
               <p className="text-muted-foreground">Apps Developed</p>
             </CardContent>
           </Card>

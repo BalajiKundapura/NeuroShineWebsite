@@ -4,124 +4,14 @@ import { DownloadIcon, StarIcon, UsersIcon, SparklesIcon } from "@/components/ic
 
 const apps = [
   {
-    name: "FocusFlow",
+    name: "Blind Aid",
     description:
-      "A distraction-free learning environment with customizable timers, visual schedules, and calming backgrounds designed for children with ADHD.",
-    category: "Productivity",
-    downloads: "10K+",
-    rating: 4.8,
+      "An app that uses lidar and haptics to help visually impaired users navigate their surroundings safely and independently.",
+    category: "Accessibility",
+    downloads: "In Development",
+    rating: 0.0,
     color: "from-blue-400 to-blue-600",
     image: "/app-focusflow.png",
-  },
-  {
-    name: "SocialStories",
-    description:
-      "Interactive social stories that help children understand and navigate social situations with visual aids and audio narration.",
-    category: "Social Skills",
-    downloads: "8K+",
-    rating: 4.9,
-    color: "from-green-400 to-green-600",
-    image: "/app-socialstories.png",
-  },
-  {
-    name: "SensoryCalm",
-    description:
-      "A collection of sensory-friendly activities, sounds, and visuals to help children self-regulate and find calm during overwhelming moments.",
-    category: "Wellness",
-    downloads: "15K+",
-    rating: 4.7,
-    color: "from-purple-400 to-purple-600",
-    image: "/app-sensorycalm.png",
-  },
-  {
-    name: "MathQuest",
-    description:
-      "Gamified math learning with adaptive difficulty, visual representations, and positive reinforcement for children of all learning styles.",
-    category: "Education",
-    downloads: "12K+",
-    rating: 4.6,
-    color: "from-orange-400 to-orange-600",
-    image: "/app-mathquest.png",
-  },
-  {
-    name: "EmotionExplorer",
-    description:
-      "Help children identify and express emotions through interactive games, visual emotion charts, and guided breathing exercises.",
-    category: "Emotional Learning",
-    downloads: "9K+",
-    rating: 4.8,
-    color: "from-pink-400 to-pink-600",
-    image: "/app-emotionexplorer.png",
-  },
-  {
-    name: "RoutineBuilder",
-    description:
-      "Create visual daily routines with customizable icons, timers, and rewards to help children develop independence and structure.",
-    category: "Life Skills",
-    downloads: "11K+",
-    rating: 4.7,
-    color: "from-teal-400 to-teal-600",
-    image: "/app-routinebuilder.png",
-  },
-  {
-    name: "ReadingBuddy",
-    description:
-      "Accessible reading app with adjustable fonts, text-to-speech, and comprehension tools designed for dyslexic readers.",
-    category: "Education",
-    downloads: "7K+",
-    rating: 4.9,
-    color: "from-indigo-400 to-indigo-600",
-    image: "/app-readingbuddy.png",
-  },
-  {
-    name: "CommunicationCards",
-    description:
-      "AAC (Augmentative and Alternative Communication) tool with customizable picture cards and voice output for non-verbal children.",
-    category: "Communication",
-    downloads: "13K+",
-    rating: 4.9,
-    color: "from-yellow-400 to-yellow-600",
-    image: "/app-communicationcards.png",
-  },
-  {
-    name: "MovementBreaks",
-    description:
-      "Quick physical activities and stretches designed to help children release energy and refocus during learning or work time.",
-    category: "Wellness",
-    downloads: "6K+",
-    rating: 4.6,
-    color: "from-red-400 to-red-600",
-    image: "/app-movementbreaks.png",
-  },
-  {
-    name: "FriendshipSkills",
-    description:
-      "Interactive lessons and role-playing scenarios to help children develop friendship skills, empathy, and conflict resolution.",
-    category: "Social Skills",
-    downloads: "8K+",
-    rating: 4.8,
-    color: "from-cyan-400 to-cyan-600",
-    image: "/app-friendshipskills.png",
-  },
-  {
-    name: "SleepHelper",
-    description:
-      "Bedtime routines, calming sounds, and guided relaxation exercises to help children with sleep difficulties wind down peacefully.",
-    category: "Wellness",
-    downloads: "10K+",
-    rating: 4.7,
-    color: "from-violet-400 to-violet-600",
-    image: "/app-sleephelper.png",
-  },
-  {
-    name: "TaskMaster",
-    description:
-      "Break down complex tasks into manageable steps with visual checklists, timers, and celebration animations for completed tasks.",
-    category: "Productivity",
-    downloads: "9K+",
-    rating: 4.8,
-    color: "from-lime-400 to-lime-600",
-    image: "/app-taskmaster.png",
   },
 ]
 
