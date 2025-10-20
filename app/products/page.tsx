@@ -43,19 +43,19 @@ export default function ProductsPage() {
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="border-2 text-center">
             <CardContent className="pt-6 space-y-2">
-              <p className="text-4xl font-bold text-primary">12</p>
+              <p className="text-4xl font-bold text-primary">1</p>
               <p className="text-muted-foreground">Apps Available</p>
             </CardContent>
           </Card>
           <Card className="border-2 text-center">
             <CardContent className="pt-6 space-y-2">
-              <p className="text-4xl font-bold text-primary">100K+</p>
+              <p className="text-4xl font-bold text-primary"></p>
               <p className="text-muted-foreground">Total Downloads</p>
             </CardContent>
           </Card>
           <Card className="border-2 text-center">
             <CardContent className="pt-6 space-y-2">
-              <p className="text-4xl font-bold text-secondary-foreground">4.8</p>
+              <p className="text-4xl font-bold text-secondary-foreground"></p>
               <p className="text-muted-foreground">Average Rating</p>
             </CardContent>
           </Card>

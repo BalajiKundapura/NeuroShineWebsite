@@ -145,7 +145,7 @@ export default function DonatePage() {
                   Partner with us to make a larger impact. We offer various sponsorship opportunities.
                 </p>
                 <Button asChild variant="outline" className="rounded-full border-2 bg-transparent">
-                  <a href="mailto:partnerships@neuroshine.org">Contact Us</a>
+                  <a href="mailto:neuroshine.official@gmail.com">Contact Us</a>
                 </Button>
               </CardContent>
             </Card>
@@ -160,7 +160,7 @@ export default function DonatePage() {
                   Donate supplies, equipment, or services that support our programs and events.
                 </p>
                 <Button asChild variant="outline" className="rounded-full border-2 bg-transparent">
-                  <a href="mailto:donations@neuroshine.org">Learn More</a>
+                  <a href="mailto:neuroshine.official@gmail.com">Learn More</a>
                 </Button>
               </CardContent>
             </Card>
@@ -238,7 +238,7 @@ export default function DonatePage() {
             <h3 className="text-2xl font-bold">Tax-Deductible Donations</h3>
             <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
               NeuroShine is a registered 501(c)(3) non-profit organization. Your donation is tax-deductible to the
-              extent allowed by law. Tax ID: XX-XXXXXXX
+              extent allowed by law. Tax ID: 33-2935754
             </p>
             <p className="text-sm text-muted-foreground">
               You will receive a receipt for your donation via email for your tax records.
