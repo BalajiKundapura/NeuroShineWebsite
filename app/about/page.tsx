@@ -6,19 +6,19 @@ const teamMembers = [
     name: "Satvik Koya",
     role: "President",
     bio: "",
-    image: "/professional-woman-smiling.png",
+    image: "/satvikPP.png",
   },
   {
     name: "Balaji Kundapura",
     role: "Vice President",
     bio: "",
-    image: "/professional-man-smiling.png",
+    image: "/balaji.jpeg",
   },
   {
     name: "Sathvik Jampana",
     role: "Treasurer",
     bio: "",
-    image: "/professional-woman-glasses.png",
+    image: "/sathvik.jpeg",
   }
 ]
 
