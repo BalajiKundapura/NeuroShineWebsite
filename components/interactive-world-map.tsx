@@ -26,7 +26,7 @@ const chapters: Chapter[] = [
     name: "Memphis",
     location: "Memphis, TN",
     volunteers: 30,
-    established: "2023",
+    established: "2024",
     contact: "memphis@neuroshine.org",
     coordinates: { lat: 35.1495, lng: -90.0490 },
   },
@@ -41,13 +41,14 @@ const chapters: Chapter[] = [
   },
   {
     id: 3,
-    name: "Tennessee",
-    location: "Nashville, TN",
-    volunteers: 40,
-    established: "2023",
-    contact: "tennessee@neuroshine.org",
-    coordinates: { lat: 36.1627, lng: -86.7816 },
+    name: "Tampa",
+    location: "Tampa, FL",
+    volunteers: 25,
+    established: "2024",
+    contact: "tampa@neuroshine.org",
+    coordinates: { lat: 27.9506, lng: -82.4572 },
   },
+  
 ]
 
 export function InteractiveWorldMap() {
