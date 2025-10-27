@@ -145,7 +145,7 @@ export default function DonatePage() {
                   Partner with us to make a larger impact. We offer various sponsorship opportunities.
                 </p>
                 <Button asChild variant="outline" className="rounded-full border-2 bg-transparent">
-                  <a href="mailto:neuroshine.official@gmail.com">Contact Us</a>
+                  <a href="mailto:info@neuroshinenpo.com">Contact Us</a>
                 </Button>
               </CardContent>
             </Card>
@@ -160,7 +160,7 @@ export default function DonatePage() {
                   Donate supplies, equipment, or services that support our programs and events.
                 </p>
                 <Button asChild variant="outline" className="rounded-full border-2 bg-transparent">
-                  <a href="mailto:neuroshine.official@gmail.com">Learn More</a>
+                  <a href="mailto:info@neuroshinenpo.com">Learn More</a>
                 </Button>
               </CardContent>
             </Card>
