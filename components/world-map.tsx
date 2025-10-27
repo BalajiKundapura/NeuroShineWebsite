@@ -19,14 +19,14 @@ interface Chapter {
 const chapters: Chapter[] = [
   {
     id: 1,
-    name: "San Francisco Bay Area",
+    name: "Collierville",
     country: "USA",
-    city: "San Francisco, CA",
-    volunteers: 45,
-    established: "Est. 2020",
-    email: "sf@neuroshine.org",
-    x: 15,
-    y: 42,
+    city: "Collierville, Tn",
+    volunteers: 40,
+    established: "Est. 2024",
+    email: "",
+    x: 23,
+    y: 50,
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const chapters: Chapter[] = [
     volunteers: 38,
     established: "Est. 2020",
     email: "la@neuroshine.org",
-    x: 16,
+    x: 23.5,
     y: 48,
   },
   {
