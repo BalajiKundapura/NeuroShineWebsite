@@ -7,32 +7,12 @@ import { CalendarIcon, UserIcon, ArrowRightIcon } from "@/components/icons"
 const blogPosts = [
   {
     id: 1,
-    title: "Understanding Neurodiversity: A Guide for Parents",
-    excerpt: "Learn about the spectrum of neurodivergent conditions and how to support your child's unique needs.",
-    author: "Dr. Sarah Johnson",
-    date: "2025-01-05",
-    category: "Education",
-    image: "/diverse-children-learning-together.jpg",
-  },
-  {
-    id: 2,
-    title: "Our New Sensory-Friendly App Launch",
-    excerpt:
-      "Introducing MindfulPlay, our latest app designed specifically for children with sensory processing differences.",
-    author: "Tech Team",
-    date: "2024-12-28",
-    category: "Product Updates",
-    image: "/child-using-tablet-app-colorful-interface.jpg",
-  },
-  {
-    id: 3,
-    title: "Volunteer Spotlight: Meet Maria from Chicago",
-    excerpt:
-      "Maria shares her journey as a NeuroShine volunteer and the impact it's had on her life and the children she works with.",
-    author: "Community Team",
-    date: "2024-12-15",
-    category: "Community",
-    image: "/volunteer-working-with-children.jpg",
+    title: "",
+    excerpt: "",
+    author: "",
+    date: "",
+    category: "",
+    image: "",
   },
 ]
 
