@@ -93,20 +93,19 @@ export default function AboutPage() {
           <Card className="border-2">
             <CardContent className="p-8 md:p-12 space-y-6 text-lg leading-relaxed text-muted-foreground">
               <p>
-                NeuroShine was founded in 2020 by a group of parents, educators, and technologists who saw a need for
-                more inclusive support systems for neurodivergent children. What started as a small volunteer group in
-                one community has grown into a nationwide movement.
+              NeuroShine was founded in 2024 and student led. NeuroShine recognized the need for more inclusive support systems for neurodivergent children.
               </p>
               <p>
-                We recognized that neurodivergent children often face barriers in traditional educational and social
-                settings. Our founders believed that with the right support, tools, and community, these children could
-                not just succeed, but truly shine.
+              What started as a small volunteer initiative has quickly expanded into a nationwide nonprofit organization, driven by the belief that every neurodivergent child deserves the opportunity to thrive.
               </p>
               <p>
-                Today, NeuroShine operates chapters across the country, has developed over a dozen accessible apps, and
-                has connected thousands of volunteers with children who benefit from their support. But our work is far
-                from done. Every day, we continue to innovate, expand, and advocate for neurodivergent children
-                everywhere.
+              We combine neuroscience, technology, and community service to create meaningful impact — from developing accessible apps and assistive tools to connecting volunteers across the country with programs that support neurodivergent learners.
+              </p>
+              <p>
+              Through research collaborations, innovative technology projects, and advocacy efforts, NeuroShine empowers children to learn, communicate, and grow in environments designed for their strengths.
+              </p>
+              <p>
+              And we’re only getting started. Every day, we continue to innovate, expand, and advocate — building a future where neurodiversity is understood, supported, and celebrated, ensuring every child has the chance to shine in their own way.
               </p>
             </CardContent>
           </Card>
