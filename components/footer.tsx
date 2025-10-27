@@ -88,7 +88,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-muted-foreground">
                 <MailIcon size={16} className="mt-0.5 flex-shrink-0" />
-                <span>neuroshine.official@gmail.com</span>
+                <span>info@neuroshinenpo.com</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-muted-foreground">
                 <MapPinIcon size={16} className="mt-0.5 flex-shrink-0" />
