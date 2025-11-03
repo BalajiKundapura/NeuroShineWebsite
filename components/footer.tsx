@@ -79,6 +79,14 @@ export function Footer() {
                   Donate
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="www.interserver.net"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Powered by InterServer
+                </Link>
+              </li>
             </ul>
           </div>
 
