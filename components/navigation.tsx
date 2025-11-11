@@ -28,15 +28,17 @@ export function Navigation() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-4">
-        <Link href="/" className="flex items-center gap-2 group">
-        <img
-          src="/favicon.png"
-          alt="NeuroShine logo"
-          className="w-10 h-10 rounded-full group-hover:scale-110 transition-transform"
-        />
-        <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-          NeuroShine
-        </span>
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 group">
+            <img
+              src="/favicon.png"
+              alt="NeuroShine logo"
+              className="w-10 h-10 rounded-full group-hover:scale-110 transition-transform"
+            />
+            <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              NeuroShine
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -81,6 +83,7 @@ export function Navigation() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             {isOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
           </button>
