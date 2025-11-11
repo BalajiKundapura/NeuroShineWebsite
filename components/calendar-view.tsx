@@ -215,7 +215,7 @@ export function CalendarView() {
                       placeholder="Enter admin password"
                       onKeyDown={(e) => e.key === "Enter" && handleAdminLogin()}
                     />
-                    <p className="text-xs text-muted-foreground">Demo password: admin123</p>
+                    <p className="text-xs text-muted-foreground"></p>
                   </div>
                   <Button onClick={handleAdminLogin} className="w-full rounded-full">
                     Login
