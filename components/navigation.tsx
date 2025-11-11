@@ -28,15 +28,15 @@ export function Navigation() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform">
-              N
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              NeuroShine
-            </span>
+        <Link href="/" className="flex items-center gap-2 group">
+        <img
+          src="/favicon.png"
+          alt="NeuroShine logo"
+          className="w-10 h-10 rounded-full group-hover:scale-110 transition-transform"
+        />
+        <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          NeuroShine
+        </span>
           </Link>
 
           {/* Desktop Navigation */}
