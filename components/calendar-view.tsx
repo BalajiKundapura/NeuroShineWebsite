@@ -24,7 +24,7 @@ interface Event {
 }
 
 export function CalendarView() {
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 9, 1)) // October 2025
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState<Event[]>([])
   const [isAdmin, setIsAdmin] = useState(false)
   const [adminPassword, setAdminPassword] = useState("")
@@ -84,7 +84,7 @@ export function CalendarView() {
 
   const handleAdminLogin = () => {
     // Simple password check (in production, use proper authentication)
-    if (adminPassword === "admin123") {
+    if (adminPassword === "koyakool123") {
       setIsAdmin(true)
       setShowAdminDialog(false)
       setAdminPassword("")
