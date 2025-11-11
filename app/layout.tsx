@@ -18,10 +18,10 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "NeuroShine - Empowering Neurodivergent Children",
+  title: "NeuroShine",
   description:
     "A non-profit dedicated to helping neurodivergent children through volunteering and innovative app development.",
-    generator: 'v0.app'
+  generator: "v0.app",
 }
 
 export default function RootLayout({
@@ -31,6 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <head>
+        <link rel="icon" type="image/png" href="/favicon.png" />
+      </head>
       <body>
         <AuthProvider>
           <FloatingParticles />
